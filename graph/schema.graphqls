@@ -1,0 +1,55 @@
+type Comment {
+  id: ID!
+  postID: String!
+  parentID: String
+  authorID: String!
+  content: String!
+  createdAt: String!
+}
+
+type CommentWithReplies {
+  id: ID!
+  postID: String!
+  parentID: String
+  authorID: String!
+  content: String!
+  createdAt: String!
+  replies: [CommentWithReplies!]!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  content: String!
+  authorID: String!
+  createdAt: String!
+  commentsDisabled: Boolean!
+  comments(limit: Int, cursor: String): [CommentWithReplies!]  # Добавляем пагинацию для комментариев
+}
+
+# Новый тип для пагинированного ответа
+type CommentConnection {
+  edges: [CommentWithReplies!]!  # Список комментариев
+  pageInfo: PageInfo!            # Информация о пагинации
+}
+
+# Информация о пагинации
+type PageInfo {
+  hasNextPage: Boolean!  # Есть ли следующая страница
+  endCursor: String      # Курсор для следующей страницы
+}
+
+extend type Query {
+  posts: [Post!]!
+  post(id: ID!): Post
+  comments(postID: String!, limit: Int, cursor: String): CommentConnection!  # Возвращаем пагинированный ответ
+}
+
+type Mutation {
+  createPost(title: String!, content: String!, authorID: String!, commentsDisabled: Boolean!): Post!
+  addComment(postID: String!, parentID: String, authorID: String!, content: String!): Comment!
+}
+
+type Subscription {
+  commentAdded(postID: String!): Comment!
+}
