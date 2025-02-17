@@ -1,12 +1,3 @@
-# Тестовое задание для Ozon стажировки
-
-Можно запустить оба режима (чтобы запустить с postgres => в go.env изменить первую строку на STORAGE=postgres)
-```
-go run ./server.go
-```
-
-Докер запускается только с in-memory, не успел поправить с postgres
-```
 docker run -p 8080:8080 \
   -e DB_HOST=localhost \
   -e DB_PORT=5432 \
@@ -14,9 +5,6 @@ docker run -p 8080:8080 \
   -e DB_PASSWORD=17051989 \
   -e DB_NAME=forozon \
   myapp
-```
-
-Также не успел реализовать пагинацию
 
 # GraphQL - создание поста:
 

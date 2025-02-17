@@ -21,12 +21,18 @@ import (
 	"github.com/YakovlevIgA/forozon/graph"
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/postgres"
+	"github.com/joho/godotenv"
 )
 
 const defaultPort = "8080"
 
 func main() {
 	ctx := context.Background()
+
+	err := godotenv.Load("go.env")
+	if err != nil {
+		log.Fatalf("Some error occured. Err: %s", err)
+	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
