@@ -1,3 +1,9 @@
+```
+go run ./server.go
+```
+
+
+```
 docker run -p 8080:8080 \
   -e DB_HOST=localhost \
   -e DB_PORT=5432 \
@@ -5,6 +11,7 @@ docker run -p 8080:8080 \
   -e DB_PASSWORD=17051989 \
   -e DB_NAME=forozon \
   myapp
+```
 
 # GraphQL - создание поста:
 
