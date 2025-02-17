@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ENV_VAR=value
+
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=web
+      - POSTGRES_PASSWORD=17051989
+      - POSTGRES_DB=forozon
+    ports:
+      - "5432:5432"
+    networks:
+      - forozon-network
+
+networks:
+  forozon-network:
+    driver: bridge
